@@ -36,7 +36,10 @@ func (h *FileHandler) Write(b []byte) (n int, err error) {
 
 // Close implements Handler interface
 func (h *FileHandler) Close() error {
-	return h.fd.Close()
+	if h.fd != nil {
+		return h.fd.Close()
+	}
+	return nil
 }
 
 // RotatingFileHandler writes log a file, if file size exceeds maxBytes,
